@@ -109,12 +109,14 @@ public class RedisSession extends StandardSession {
   public void writeObjectData(java.io.ObjectOutputStream out) throws IOException {
     super.writeObjectData(out);
     out.writeLong(this.getCreationTime());
+    out.writeInt(getMaxInactiveInterval());
   }
 
   @Override
   public void readObjectData(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
     super.readObjectData(in);
     this.setCreationTime(in.readLong());
+    this.setMaxInactiveInterval(in.readInt());
   }
 
 }
